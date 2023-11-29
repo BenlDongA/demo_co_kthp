@@ -10,6 +10,7 @@ const Navbar = () => {
 const [nav, setNav] = useState(false)
 const navigate = useNavigate();
 
+
   return (
 
     <div className='container'>
@@ -34,6 +35,12 @@ const navigate = useNavigate();
         />
       </div>
       {/* Cart button */}
+      <Link to="/new">
+  <button>
+    <BsFillCartFill size={20} className="button-cart" />
+    New
+  </button>
+</Link>
       <Link to="/cart">
         <button>
       <BsFillCartFill size={20} className="button-cart" />

@@ -1,8 +1,9 @@
 // Food.jsx
 import React, { useState, useEffect } from 'react';
-import { useCart } from '../components/CartContext';
+import { useCart } from '../cart/CartContext';
 import { FaHeart } from "react-icons/fa";
-
+import SearchBar from './search_food';
+import { removeDiacritics } from '../until';
 const Food = () => {
   const { addToCart } = useCart();
   const [foods, setFoods] = useState([]);
@@ -10,23 +11,33 @@ const Food = () => {
   const [loading, setLoading] = useState(true);
   const [selectedType, setSelectedType] = useState('All');
   const [selectedPrice, setSelectedPrice] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+ useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        'https://655f02f3879575426b4459ed.mockapi.io/anh'
+      );
+      const data = await response.json();
+      setOriginalFoods(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://655f02f3879575426b4459ed.mockapi.io/anh');
-        const data = await response.json();
-        setFoods(data);
-        setOriginalFoods(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  fetchData();
+}, []);
+useEffect(() => {
+  // Lọc danh sách món ăn dựa trên searchQuery (không cần dấu)
+  const sanitizedSearchQuery = removeDiacritics(searchQuery);
+  const filteredFoods = originalFoods.filter((item) =>
+    removeDiacritics(item.name).toLowerCase().includes(sanitizedSearchQuery.toLowerCase())
+  );
+  setFoods(filteredFoods);
+}, [searchQuery, originalFoods]);
 
-    fetchData();
-  }, []);
 
   const filterType = (category) => {
     if (category === 'All') {
@@ -52,10 +63,12 @@ const Food = () => {
 
   return (
     <div className='max-w-[1640px] m-auto px-4 py-12'>
+ 
       <h1 className='text-orange-600 font-bold text-4xl text-center'>
+        
         Top Rated Menu Items
       </h1>
-
+      <SearchBar value={searchQuery} onChange={setSearchQuery} />
       <div className='flex flex-col lg:flex-row justify-between'>
         <div>
           <p className='font-bold text-gray-700'>Filter Type</p>

@@ -1,0 +1,57 @@
+
+.cart-page {
+    display: flex;
+    flex-direction: column;
+    height: 97vh;
+    padding-left: 20px;
+   padding-top: 60px;
+  }
+  .cart-items {
+    flex-grow: 1; 
+    overflow-y: auto;
+  }
+#thanhtoan{
+width: 170px;
+  }
+#backhome{
+  width: 70px;
+}
+  .cart-item {
+    list-style: none;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+  }
+  .item-image img {
+    width: 300px;
+    height: 200px;
+    margin-right: 10px;
+  }
+  .item-details p {
+    margin: 0;
+  }
+  #but-1{
+    background-color: #5b615b; /* Màu nền */
+    color: white; /* Màu chữ */
+   width: 50px;
+   height: 50px;
+    border: none; /* Loại bỏ đường viền */
+    border-radius: 4px; /* Bo tròn góc */
+    cursor: pointer; /* Con trỏ khi rê chuột */
+    margin-right: 5px; /* Khoảng cách với nút giảm */
+    margin-top: 5px;
+  }
+  #but-2{
+    background-color: #ff1100; /* Màu nền */
+    color: white; /* Màu chữ */
+    width: 50px;
+    height: 50px;
+    border: none; /* Loại bỏ đường viền */
+    border-radius: 4px; /* Bo tròn góc */
+    cursor: pointer; /* Con trỏ khi rê chuột */
+  }
+  
+  

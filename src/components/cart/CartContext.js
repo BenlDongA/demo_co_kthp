@@ -8,6 +8,14 @@ const initialState = {
   totalPrice: 0,
 };
 
+const calculateTotalQuantity = (cart) => {
+  return cart.reduce((total, item) => total + (item.checked ? item.quantity : 0), 0);
+};
+
+const calculateTotalPrice = (cart) => {
+  return cart.reduce((total, item) => total + (item.checked ? item.price : 0), 0);
+};
+
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
@@ -50,7 +58,7 @@ const cartReducer = (state, action) => {
             ? {
                 ...item,
                 quantity: item.quantity + 1,
-                price: item.price + item.price / item.quantity, // adjust the price based on the new quantity
+                price: item.price + item.price / item.quantity,
               }
             : item
         ),
@@ -92,24 +100,34 @@ const cartReducer = (state, action) => {
 
     case 'CALCULATE_CHECKED_TOTALS':
       const checkedItems = state.cart.filter(item => item.checked);
-      const totalCheckedQuantity = checkedItems.reduce((total, item) => total + item.quantity, 0);
-      const totalCheckedPrice = checkedItems.reduce((total, item) => total + item.price, 0);
+      const totalCheckedQuantity = calculateTotalQuantity(checkedItems);
+      const totalCheckedPrice = calculateTotalPrice(checkedItems);
 
       return {
         ...state,
         totalQuantity: totalCheckedQuantity,
         totalPrice: totalCheckedPrice,
       };
-      case 'TOGGLE_ALL_ITEMS':
-        const allItemsChecked = action.payload;
-        const updatedCart = state.cart.map(item => ({ ...item, checked: allItemsChecked }));
-  
-        return {
-          ...state,
-          cart: updatedCart,
-          totalQuantity: allItemsChecked ? state.totalQuantity : 0,
-          totalPrice: allItemsChecked ? state.totalPrice : 0,
-        };
+
+    case 'TOGGLE_ALL_ITEMS':
+      const allItemsChecked = action.payload;
+      const updatedCart = state.cart.map(item => ({ ...item, checked: allItemsChecked }));
+
+      return {
+        ...state,
+        cart: updatedCart,
+        totalQuantity: allItemsChecked ? calculateTotalQuantity(updatedCart) : 0,
+        totalPrice: allItemsChecked ? calculateTotalPrice(updatedCart) : 0,
+      };
+
+    case 'RESET_CART':
+      return {
+        ...state,
+        cart: action.payload,
+        totalQuantity: calculateTotalQuantity(action.payload),
+        totalPrice: calculateTotalPrice(action.payload),
+      };
+
     default:
       return state;
   }
@@ -118,50 +136,42 @@ const cartReducer = (state, action) => {
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  const addToCart = (item) => {
-    dispatch({ type: 'ADD_TO_CART', payload: item });
-  };
-
-  const incrementQuantity = (item) => {
-    dispatch({ type: 'INCREMENT_QUANTITY', payload: item });
-  };
-
-  const decrementQuantity = (item) => {
-    dispatch({ type: 'DECREMENT_QUANTITY', payload: item });
-  };
-
-  const removeFromCart = (item) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: item });
-  };
-
-  const toggleCheckedItem = (item) => {
-    dispatch({ type: 'TOGGLE_CHECKED_ITEM', payload: item });
-    dispatch({ type: 'CALCULATE_CHECKED_TOTALS' });
-  };
-  const toggleAllItems = (isChecked) => {
-    dispatch({ type: 'TOGGLE_ALL_ITEMS', payload: isChecked });
-    if (isChecked) {
-      dispatch({ type: 'CALCULATE_CHECKED_TOTALS' });
-    } else {
-      dispatch({ type: 'CALCULATE_TOTALS' });
-    }
-  };
   useEffect(() => {
     dispatch({ type: 'CALCULATE_CHECKED_TOTALS' });
-  }, [state.cart, state.cart.map(item => item.checked)]);
+  }, [state.cart]);
 
   return (
-    <CartContext.Provider value={{ cart: state.cart, 
-      totalQuantity: state.totalQuantity,
-       totalPrice: state.totalPrice, 
-       addToCart, 
-       incrementQuantity, 
-       decrementQuantity,
-        removeFromCart, 
-        toggleCheckedItem,
-        toggleAllItems }}>
-        {children}
-      </CartContext.Provider>
+    <CartContext.Provider
+      value={{
+        cart: state.cart,
+        totalQuantity: state.totalQuantity,
+        totalPrice: state.totalPrice,
+        addToCart: (item) => dispatch({ type: 'ADD_TO_CART', payload: item }),
+        incrementQuantity: (item) => dispatch({ type: 'INCREMENT_QUANTITY', payload: item }),
+        decrementQuantity: (item) => dispatch({ type: 'DECREMENT_QUANTITY', payload: item }),
+        removeFromCart: (item) => dispatch({ type: 'REMOVE_FROM_CART', payload: item }),
+        toggleCheckedItem: (item) => {
+          dispatch({ type: 'TOGGLE_CHECKED_ITEM', payload: item });
+          dispatch({ type: 'CALCULATE_CHECKED_TOTALS' });
+        },
+        toggleAllItems: (isChecked) => {
+          dispatch({ type: 'TOGGLE_ALL_ITEMS', payload: isChecked });
+        },
+        handlePayment: () => {
+          const confirmMessage = `Bạn có chắc muốn thanh toán ${state.totalPrice}$ không?`;
+
+          if (window.confirm(confirmMessage)) {
+            const unpaidItems = state.cart.filter(item => !item.checked);
+            dispatch({ type: 'RESET_CART', payload: unpaidItems });
+            alert('Thanh toán thành công!');
+          } else {
+            alert('Thanh toán đã bị hủy bỏ.');
+          }
+        },
+      }}
+    >
+      {children}
+    </CartContext.Provider>
   );
 };
 

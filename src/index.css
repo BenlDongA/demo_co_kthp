@@ -13,62 +13,6 @@
 .zz{
   padding-top: 25px;
 }
-
-.cart-page {
-  padding: 20px;
-}
-
-.cart-items {
-  margin-top: 20px;
-}
-
-.cart-item {
-  list-style: none;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.item-image img {
-  width: 250px;
-  height: 150px;
-  margin-right: 10px;
-}
-
-.item-details p {
-  margin: 0;
-}
-
-/* Trong file CSS của bạn (ví dụ: styles.css) */
-
-/* CSS cho nút tăng (+) */
-
-
-
-#but-1{
-  background-color: #5b615b; /* Màu nền */
-  color: white; /* Màu chữ */
-  padding: 8px 14px; /* Kích thước nút */
-  border: none; /* Loại bỏ đường viền */
-  border-radius: 4px; /* Bo tròn góc */
-  cursor: pointer; /* Con trỏ khi rê chuột */
-  margin-right: 5px; /* Khoảng cách với nút giảm */
-  margin-top: 5px;
-}
-#but-2{
-  background-color: #ff1100; /* Màu nền */
-  color: white; /* Màu chữ */
-  padding: 8px 16px; /* Kích thước nút */
-  border: none; /* Loại bỏ đường viền */
-  border-radius: 4px; /* Bo tròn góc */
-  cursor: pointer; /* Con trỏ khi rê chuột */
-}
-
-.cart-page{
-  padding-top:60px ;
-}
 .Tim{
   margin-top: 5px;
   margin-right: 0px;

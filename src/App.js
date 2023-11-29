@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import Navbar from './components/navbar/Navbar';
-import Hero from './components/banner/banner';
+import New from './components/new';
 import HeadlineCards from './components/HeadlineCards';
-import Food from './components/Food';
+import Food from './components/food/Food';
 import './index.css';
-import { CartProvider } from './components/CartContext';
-import CartPage from './components/cart';
+import { CartProvider } from './components/cart/CartContext';
+import CartPage from './components/cart/cart';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Footerr from './components/footer';
-
+import Banner from './components/banner/banner';
 function App() {
   const location = useLocation();
 
@@ -28,13 +28,14 @@ function App() {
         <Route path="/" element={<div>
           <Navbar />
           <div className='zz'>
-            <Hero />
+          <Banner/>
             <HeadlineCards />
             <Food />
           </div>
           <Footerr />
         </div>} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/new" element={<New />} />
       </Routes>
     </CartProvider>
   );
