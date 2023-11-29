@@ -1,0 +1,114 @@
+.container{
+    max-width: 1640px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  cursor: pointer;
+  position: fixed;
+  z-index: 99999;
+  background-color: rgb(212, 212, 212);
+   
+}
+.lo{
+ font-weight: 800;
+ font-size:30px;
+}
+.Home{
+    margin-left: 100px;
+}
+.search{
+    background-color: #1d344b;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: 500px;
+
+}
+.cart{
+    border-radius: 9999px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    align-items: center;
+    display: flex;
+    display: none !important;
+     background-color: #000;
+  color: #fff;
+}
+button {
+    background-color: #000;
+    color: #fff;
+    display: none;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 9999px;
+  }
+  
+  @media (min-width: 768px) {
+    button {
+      display: flex;
+    }
+  }
+  
+  .button-cart {
+    margin-right: 0.5rem;
+
+  }
+  
+  /* The container styles for the navigation */
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 10;
+    transition: left 0.3s;
+  }
+  
+  /* Hidden state */
+  .nav-container.hidden {
+    left: -100%;
+  }
+  
+  /* Close button styles */
+  .close-button {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    cursor: pointer;
+  }
+  
+  /* Title styles */
+  .title {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+  
+  /* Navigation list styles */
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    color: #48525e; /* Adjust the text color as needed */
+  }
+  
+  /* Individual navigation item styles */
+  .nav-item {
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Icon styles */
+  .icon {
+    margin-right: 1rem;
+  }
+  

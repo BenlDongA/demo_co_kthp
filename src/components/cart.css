@@ -1,0 +1,35 @@
+/* Add your existing styles for other elements in CartPage.css */
+
+.cart-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Use 100% of the viewport height */
+    padding: 20px;
+   padding-top: 60px;
+  }
+  
+  .cart-items {
+    flex-grow: 1; /* Allow the cart items to grow and use available space */
+    overflow-y: auto; /* Add a scrollbar if the content overflows */
+  }
+  
+  /* Style the fixed section at the bottom */
+  .fixed-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff; /* Add a background color */
+    padding: 10px;
+    box-shadow: 0 -4px 6px rgba(255, 1, 1, 0.1); /* Add a subtle shadow at the bottom */
+  }
+  
+  /* Add more styles as needed */
+#thanhtoan{
+
+width: 170px;
+
+  }
+#backhome{
+  width: 70px;
+}
