@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from '../cart/CartContext';
 import { FaHeart } from "react-icons/fa";
 import SearchBar from './search_food';
-import { removeDiacritics } from '../until';
+import { removeDiacritics } from './until';
 const Food = () => {
   const { addToCart } = useCart();
   const [foods, setFoods] = useState([]);
@@ -11,7 +11,8 @@ const Food = () => {
   const [loading, setLoading] = useState(true);
   const [selectedType, setSelectedType] = useState('All');
   const [selectedPrice, setSelectedPrice] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');;
+  const [isClicked, setIsClicked] = useState(true);
  useEffect(() => {
   const fetchData = async () => {
     try {
@@ -39,16 +40,17 @@ useEffect(() => {
 }, [searchQuery, originalFoods]);
 
 
-  const filterType = (category) => {
-    if (category === 'All') {
-      setFoods(originalFoods);
-    } else {
-      const filteredData = originalFoods.filter((item) => item.type === category);
-      setFoods(filteredData);
-    }
 
-    setSelectedType(category);
-  };
+const filterType = (type) => {
+  if (type === 'All') {
+    setFoods(originalFoods);
+  } else {
+    const filteredData = originalFoods.filter((item) => item.type === type);
+    setFoods(filteredData);
+  }
+  setSelectedType(type);
+  setIsClicked(true); // Update isClicked when a button is clicked
+};
 
   const filterPrice = (price) => {
     if (price === 'All') {
@@ -72,49 +74,49 @@ useEffect(() => {
       <div className='flex flex-col lg:flex-row justify-between'>
         <div>
           <p className='font-bold text-gray-700'>Filter Type</p>
-          <div className='flex justify-between flex-wrap'>
-            <button
+                  <div className='flex justify-between flex-wrap'>
+                  <button
               onClick={() => filterType('All')}
-              className={`m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white ${
-                selectedType === 'All' ? 'bg-orange-600 text-white' : ''
+              className={`m-1 border-orange-600 ${
+                selectedType === 'All' && isClicked ? 'bg-orange-600 text-white' : 'text-orange-600'
               }`}
             >
               All
             </button>
-            <button
-              onClick={() => filterType('BBQ')}
-              className={`m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white ${
-                selectedType === 'BBQ' ? 'bg-orange-600 text-white' : ''
-              }`}
-            >
-              BBQ
-            </button>
-            <button
-              onClick={() => filterType('hai san')}
-              className={`m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white ${
-                selectedType === 'hai san' ? 'bg-orange-600 text-white' : ''
-              }`}
-            >
-              Hải Sản
-            </button>
-            <button
-              onClick={() => filterType('lau')}
-              className={`m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white ${
-                selectedType === 'lau' ? 'bg-orange-600 text-white' : ''
-              }`}
-            >
-              Lẫu
-            </button>
-            <button
-              onClick={() => filterType('nuoc')}
-              className={`m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white ${
-                selectedType === 'nuoc' ? 'bg-orange-600 text-white' : ''
-              }`}
-            >
-              Đồ Uống
-            </button>
-            {/* Add more buttons for other types as needed */}
-          </div>
+              <button
+                onClick={() => filterType('BBQ')}
+                className={`m-1 border-orange-600 ${
+                  selectedType === 'BBQ' && isClicked ? 'bg-orange-600 text-white' : 'text-orange-600'
+                }`}
+              >
+                BBQ
+              </button>
+              <button
+                onClick={() => filterType('hai san')}
+                className={`m-1 border-orange-600 ${
+                  selectedType === 'hai san' && isClicked ? 'bg-orange-600 text-white' : 'text-orange-600'
+                }`}
+              >
+                Hải sản
+              </button>
+              <button
+                onClick={() => filterType('lau')}
+                className={`m-1 border-orange-600 ${
+                  selectedType === 'lau' && isClicked ? 'bg-orange-600 text-white' : 'text-orange-600'
+                }`}
+              >
+                Lẩu
+              </button>
+              <button
+                onClick={() => filterType('nuoc')}
+                className={`m-1 border-orange-600 ${
+                  selectedType === 'nuoc' && isClicked ? 'bg-orange-600 text-white' : 'text-orange-600'
+                }`}
+              >
+                Đồ uống
+              </button>
+          {/* Add more buttons for other types as needed */}
+        </div>
         </div>
 
         <div>
@@ -122,8 +124,8 @@ useEffect(() => {
           <div className='flex justify-between max-w-[390px] w-full'>
             <button
               onClick={() => filterPrice('All')}
-              className={`m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white ${
-                selectedPrice === 'All' ? 'bg-orange-600 text-white' : ''
+              className={`m-1 border-orange-600 text-orange-600 ${
+                selectedPrice === 'All' ? '' : ''
               }`}
             >
               All
