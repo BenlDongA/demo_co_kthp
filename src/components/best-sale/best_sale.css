@@ -1,0 +1,72 @@
+.img-bestsale{
+    height: 500px;
+    margin-left: 15.5%;
+ 
+}
+.showall{
+    text-align: center;
+    margin-left: 46.5%;
+margin-top: 20px ;
+
+}
+#best{
+display: flex;
+   
+}
+.welcom{
+    position: absolute;
+    margin-top: 80px;
+    margin-left: 47%;
+    font-size: 40px;
+    font-weight: 600;
+    color: #EA6D27;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.welcom1{
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 47%;
+    font-size: 25px;
+    font-style: italic;
+    
+
+}
+.but-best{
+    width: 120px;
+    height: 50px;
+   border-radius: 0px;
+   border-top-left-radius:15px;
+   border-bottom-right-radius:15px;
+   border-top-right-radius:3px;
+   border-bottom-left-radius:3px;
+
+   margin-top: 400px;
+   margin-left: 3%;
+   padding-left: 35px;
+   font-size: 18px;
+  font-style: italic;
+
+}
+.but-best1{
+    width: 120px;
+    height: 50px;
+   border-radius: 0px;
+   border-top-left-radius:15px;
+   border-bottom-right-radius:15px;
+   border-top-right-radius:3px;
+   border-bottom-left-radius:3px;
+   background-color: #EA6D27;
+   border: #EA6D27;
+  
+   margin-left: 12%;
+   margin-top: 400px;
+   padding-left: 30px;
+   font-size: 18px;
+
+}
+.fe{
+    width: 80px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+}

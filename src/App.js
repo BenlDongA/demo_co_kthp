@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
+import './index.css';
 import Navbar from './components/navbar/Navbar';
-import New from './components/new';
+import BookTable from './components/booktable';
 import HeadlineCards from './components/HeadlineCards';
 import Food from './components/food/Food';
-import './index.css';
 import { CartProvider } from './components/cart/CartContext';
 import CartPage from './components/cart/cart';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Footerr from './components/footer';
 import Banner from './components/banner/banner';
-import SearchResultsPage from './components/SearchResultsPage'
+import SearchResultsPage from './components/food/SearchResultsPage'
+import BestSale from './components/best-sale/best_sale';
+import BestSalez from './components/best-sale/contact'
+import Feedback from './components/feedback/feedback';
 function App() {
   const location = useLocation();
 
@@ -23,6 +26,12 @@ function App() {
     if (location.pathname === "/food") {
       pageTitle = "Menu |DBCO Restaurant";
     }
+    if (location.pathname === "/feedback") {
+      pageTitle = "FeedBack |DBCO Restaurant";
+    }
+    if (location.pathname === "/booktable") {
+      pageTitle = "Đặt Bàn |DBCO Restaurant";
+    }
     document.title = pageTitle;
   }, [location.pathname]);
 
@@ -35,14 +44,16 @@ function App() {
             <div className='zz'>
               <Banner />
               <HeadlineCards />
-              {/* <Food /> */}
+              <BestSalez/>
+             <BestSale/>
             </div>
             <Footerr />
           </div>} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/new" element={<New />} />
+          <Route path="/booktable" element={<BookTable />} />
           <Route path="/food" element={<Food />} />
           <Route path="/search-results" element={<SearchResultsPage />} />
+          <Route path="/feedback" element={<Feedback/>} />
         </Routes>
       </div>
     </CartProvider>

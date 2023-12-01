@@ -6,11 +6,12 @@ import { FaUserFriends, FaWallet } from 'react-icons/fa';
 import { MdFavorite, MdHelp } from 'react-icons/md';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { Link, useNavigate } from 'react-router-dom';
+import { MdLogin } from "react-icons/md";
 import './navbar.css';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -43,6 +44,9 @@ const Navbar = () => {
           <div onClick={() => navigate('/food')} className='Home'>
            MENU
           </div>
+          <div onClick={() => navigate('/feedback')} className='Home'>
+           Feedback
+          </div>
           
         </div>
 
@@ -60,7 +64,7 @@ const Navbar = () => {
         </div>
 
         {/* Cart button */}
-        <Link to="/new">
+        <Link to="/booktable">
           <button>
             <MdTableBar size={20} className="button-cart" />
             Book a table
@@ -70,6 +74,12 @@ const Navbar = () => {
           <button>
             <BsFillCartFill size={20} className="button-cart" />
             Cart
+          </button>
+        </Link>
+        <Link to="/cart">
+          <button>
+          <MdLogin  size={20} className="button-cart" />
+            Login
           </button>
         </Link>
 
@@ -82,21 +92,30 @@ const Navbar = () => {
           <h2 className='title'>
             DBCO <span className='font-bold'>Restaurant</span>
           </h2>
-          <nav>
-            <ul className='nav-list'>
-              {/* Repeat the following list item structure for each navigation item */}
-              <li className='nav-item'>
-                <TbTruckDelivery size={25} className='icon' />
-                Orders
-              </li>
-              <li className='text-xl py-4 flex'><MdFavorite size={25} className='mr-4' /> Favorites</li>
-              <li className='text-xl py-4 flex'><FaWallet size={25} className='mr-4' /> Wallet</li>
-              <li className='text-xl py-4 flex'><MdHelp size={25} className='mr-4' /> Help</li>
-              <li className='text-xl py-4 flex'><AiFillTag size={25} className='mr-4' /> Promotions</li>
-              <li className='text-xl py-4 flex'><BsFillSaveFill size={25} className='mr-4' /> Best Ones</li>
-              <li className='text-xl py-4 flex'><FaUserFriends size={25} className='mr-4' /> Invite Friends</li>
+          {nav ? <div className='bg-black/80 fixed w-full h-screen z-10 top-0 left-0'></div> : ''}
+      
+
+      <div className={nav ? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-10 duration-300' : 'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-10 duration-300' }>
+        <AiOutlineClose
+            onClick={()=> setNav(!nav)}
+          size={30}
+          className='absolute right-4 top-4 cursor-pointer'
+        />
+        <h2 className='text-2xl p-4'>
+          DBCO <span className='font-bold'>Restaurant</span>
+        </h2>
+        <nav>
+            <ul className='flex flex-col p-4 text-gray-800'>
+                <li className='text-xl py-4 flex'><TbTruckDelivery size={25} className='mr-4' /> Orders</li>
+                <li className='text-xl py-4 flex'><MdFavorite size={25} className='mr-4' /> Favorites</li>
+                <li className='text-xl py-4 flex'><FaWallet size={25} className='mr-4' /> Wallet</li>
+                <li className='text-xl py-4 flex'><MdHelp size={25} className='mr-4' /> Help</li>
+                <li className='text-xl py-4 flex'><AiFillTag size={25} className='mr-4' /> Promotions</li>
+                <li className='text-xl py-4 flex'><BsFillSaveFill size={25} className='mr-4' /> Best Ones</li>
+                <li className='text-xl py-4 flex'><FaUserFriends size={25} className='mr-4' /> Invite Friends</li>
             </ul>
-          </nav>
+        </nav>
+      </div>
         </div>
       </div>
 

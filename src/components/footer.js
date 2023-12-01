@@ -4,6 +4,7 @@ import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-
 
 function Footerr() {
   return (
+    <div  className='max-w-[1640px] mx-auto p-4 mt-4'>
     <Footer bgDark>
       <div className="w-full">
       <hr></hr>
@@ -56,6 +57,7 @@ function Footerr() {
         </div>
       </div>
     </Footer>
+    </div>
   );
 }
 export default Footerr

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useCart } from '../components/cart/CartContext';
+import { useCart } from '../cart/CartContext';
+import axios from 'axios';
 
 function SearchResultsPage() {
   const [searchResults, setSearchResults] = useState([]);
@@ -13,11 +14,11 @@ function SearchResultsPage() {
     const fetchData = async () => {
       try {
         if (query) {
-          const response = await fetch(`https://655f02f3879575426b4459ed.mockapi.io/anh?search=${query}`);
-          const data = await response.json();
+          const response = await axios.get(`https://655f02f3879575426b4459ed.mockapi.io/anh?search=${query}`); // Sử dụng Axios thay vì fetch
+          const data = response.data;
 
           if (data.length === 0) {
-            window.alert('không tìm thấy sản phẩm.');
+            window.alert('Không tìm thấy sản phẩm.');
           } else {
             setSearchResults(data);
           }

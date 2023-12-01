@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../cart/CartContext';
 import { FaHeart } from "react-icons/fa";
-
+import axios from 'axios';
 const Food = () => {
   const { addToCart } = useCart();
   const [foods, setFoods] = useState([]); 
@@ -16,19 +16,17 @@ const Food = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          'https://655f02f3879575426b4459ed.mockapi.io/anh'
-        );
-        const data = await response.json();
+        const response = await axios.get('https://655f02f3879575426b4459ed.mockapi.io/anh'); // Sử dụng Axios thay vì fetch
+        const data = response.data;
         setOriginalFoods(data);
-        setFoods(data); // Ban đầu, khi trang được tải, foods và originalFoods sẽ chứa cùng một danh sách món ăn
+        setFoods(data); 
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchData();
   }, []);
 
@@ -44,18 +42,26 @@ const filterType = (type) => {
 };
 
 const filterPrice = (price) => {
+  let filteredData = [...originalFoods]; 
+  
+  if (selectedType !== 'All') {
+    filteredData = originalFoods.filter((item) => item.type === selectedType);
+  }
+
   if (price === 'All') {
-    setFoods(originalFoods);
+    setFoods(filteredData);
   } else if (price === 'LessThan10') {
-    const filteredData = originalFoods.filter((item) => item.price < 10);
+    filteredData = filteredData.filter((item) => item.price < 10);
     setFoods(filteredData);
   } else if (price === 'MoreThan10') {
-    const filteredData = originalFoods.filter((item) => item.price >= 10);
+    filteredData = filteredData.filter((item) => item.price >= 10);
     setFoods(filteredData);
   }
 
   setSelectedPrice(price);
+  setIsClicked(true); 
 };
+
 
   return (
     <div className='max-w-[1640px] m-auto px-4 py-12'>
@@ -118,27 +124,27 @@ const filterPrice = (price) => {
           <div className='flex justify-between max-w-[390px] w-full'>
         <button
           onClick={() => filterPrice('All')}
-          className={`m-1 border-orange-600 text-orange-600 ${
-            selectedPrice === 'All' ? '' : ''
+          className={`m-1 border-orange-600  ${
+            selectedPrice === 'All'  && isClicked ? 'bg-orange-600 text-white' : 'text-orange-600'
           }`}
         >
           All
         </button>
         <button
           onClick={() => filterPrice('LessThan10')}
-          className={`m-1 border-orange-600 text-orange-600 ${
-            selectedPrice === 'LessThan10' ? 'bg-orange-600 text-white' : ''
+          className={`m-1 border-orange-600  ${
+            selectedPrice === 'LessThan10' && isClicked ? 'bg-orange-600 text-white' : 'text-orange-600'
           }`}
         >
-          Less than $10
+          Dưới $10
         </button>
         <button
           onClick={() => filterPrice('MoreThan10')}
-          className={`m-1 border-orange-600 text-orange-600 ${
-            selectedPrice === 'MoreThan10' ? 'bg-orange-600 text-white' : ''
+          className={`m-1 border-orange-600  ${
+            selectedPrice === 'MoreThan10' && isClicked ? 'bg-orange-600 text-white' : 'text-orange-600'
           }`}
         >
-          More than $10
+          Trên $10
         </button>
       </div>
         </div>
