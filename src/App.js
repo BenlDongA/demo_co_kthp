@@ -9,6 +9,7 @@ import CartPage from './components/cart/cart';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Footerr from './components/footer';
 import Banner from './components/banner/banner';
+import SearchResultsPage from './components/SearchResultsPage'
 function App() {
   const location = useLocation();
 
@@ -19,24 +20,31 @@ function App() {
     if (location.pathname === "/cart") {
       pageTitle = "Cart |DBCO Restaurant";
     }
+    if (location.pathname === "/food") {
+      pageTitle = "Menu |DBCO Restaurant";
+    }
     document.title = pageTitle;
   }, [location.pathname]);
 
   return (
     <CartProvider>
-      <Routes>
-        <Route path="/" element={<div>
-          <Navbar />
-          <div className='zz'>
-          <Banner/>
-            <HeadlineCards />
-            <Food />
-          </div>
-          <Footerr />
-        </div>} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/new" element={<New />} />
-      </Routes>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<div>
+            <div className='zz'>
+              <Banner />
+              <HeadlineCards />
+              {/* <Food /> */}
+            </div>
+            <Footerr />
+          </div>} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/new" element={<New />} />
+          <Route path="/food" element={<Food />} />
+          <Route path="/search-results" element={<SearchResultsPage />} />
+        </Routes>
+      </div>
     </CartProvider>
   );
 }

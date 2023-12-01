@@ -2,44 +2,35 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../cart/CartContext';
 import { FaHeart } from "react-icons/fa";
-import SearchBar from './search_food';
-import { removeDiacritics } from './until';
+
 const Food = () => {
   const { addToCart } = useCart();
-  const [foods, setFoods] = useState([]);
+  const [foods, setFoods] = useState([]); 
   const [originalFoods, setOriginalFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedType, setSelectedType] = useState('All');
   const [selectedPrice, setSelectedPrice] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');;
+
   const [isClicked, setIsClicked] = useState(true);
- useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        'https://655f02f3879575426b4459ed.mockapi.io/anh'
-      );
-      const data = await response.json();
-      setOriginalFoods(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  fetchData();
-}, []);
-useEffect(() => {
-  // Lọc danh sách món ăn dựa trên searchQuery (không cần dấu)
-  const sanitizedSearchQuery = removeDiacritics(searchQuery);
-  const filteredFoods = originalFoods.filter((item) =>
-    removeDiacritics(item.name).toLowerCase().includes(sanitizedSearchQuery.toLowerCase())
-  );
-  setFoods(filteredFoods);
-}, [searchQuery, originalFoods]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          'https://655f02f3879575426b4459ed.mockapi.io/anh'
+        );
+        const data = await response.json();
+        setOriginalFoods(data);
+        setFoods(data); // Ban đầu, khi trang được tải, foods và originalFoods sẽ chứa cùng một danh sách món ăn
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-
+    fetchData();
+  }, []);
 
 const filterType = (type) => {
   if (type === 'All') {
@@ -52,16 +43,19 @@ const filterType = (type) => {
   setIsClicked(true); // Update isClicked when a button is clicked
 };
 
-  const filterPrice = (price) => {
-    if (price === 'All') {
-      setFoods(originalFoods);
-    } else {
-      const filteredData = originalFoods.filter((item) => item.price === price);
-      setFoods(filteredData);
-    }
+const filterPrice = (price) => {
+  if (price === 'All') {
+    setFoods(originalFoods);
+  } else if (price === 'LessThan10') {
+    const filteredData = originalFoods.filter((item) => item.price < 10);
+    setFoods(filteredData);
+  } else if (price === 'MoreThan10') {
+    const filteredData = originalFoods.filter((item) => item.price >= 10);
+    setFoods(filteredData);
+  }
 
-    setSelectedPrice(price);
-  };
+  setSelectedPrice(price);
+};
 
   return (
     <div className='max-w-[1640px] m-auto px-4 py-12'>
@@ -70,7 +64,7 @@ const filterType = (type) => {
         
         Top Rated Menu Items
       </h1>
-      <SearchBar value={searchQuery} onChange={setSearchQuery} />
+  
       <div className='flex flex-col lg:flex-row justify-between'>
         <div>
           <p className='font-bold text-gray-700'>Filter Type</p>
@@ -122,16 +116,31 @@ const filterType = (type) => {
         <div>
           <p className='font-bold text-gray-700'>Filter Price</p>
           <div className='flex justify-between max-w-[390px] w-full'>
-            <button
-              onClick={() => filterPrice('All')}
-              className={`m-1 border-orange-600 text-orange-600 ${
-                selectedPrice === 'All' ? '' : ''
-              }`}
-            >
-              All
-            </button>
-            {/* Add more buttons for other prices as needed */}
-          </div>
+        <button
+          onClick={() => filterPrice('All')}
+          className={`m-1 border-orange-600 text-orange-600 ${
+            selectedPrice === 'All' ? '' : ''
+          }`}
+        >
+          All
+        </button>
+        <button
+          onClick={() => filterPrice('LessThan10')}
+          className={`m-1 border-orange-600 text-orange-600 ${
+            selectedPrice === 'LessThan10' ? 'bg-orange-600 text-white' : ''
+          }`}
+        >
+          Less than $10
+        </button>
+        <button
+          onClick={() => filterPrice('MoreThan10')}
+          className={`m-1 border-orange-600 text-orange-600 ${
+            selectedPrice === 'MoreThan10' ? 'bg-orange-600 text-white' : ''
+          }`}
+        >
+          More than $10
+        </button>
+      </div>
         </div>
       </div>
 
