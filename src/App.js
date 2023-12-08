@@ -13,6 +13,9 @@ import SearchResultsPage from './components/food/SearchResultsPage'
 import BestSale from './components/best-sale/best_sale';
 import BestSalez from './components/best-sale/contact'
 import Feedback from './components/feedback/feedback';
+import Login from './components/Login/Login'
+import Register from './components/Register/Register';
+
 function App() {
   const location = useLocation();
 
@@ -32,6 +35,13 @@ function App() {
     if (location.pathname === "/booktable") {
       pageTitle = "Đặt Bàn |DBCO Restaurant";
     }
+    if (location.pathname === "/login") {
+        pageTitle = "Đăng nhập |DBCO Restaurant";
+      }
+      if (location.pathname === "/register") {
+        pageTitle = "Đăng kí |DBCO Restaurant";
+      }
+
     document.title = pageTitle;
   }, [location.pathname]);
 
@@ -54,6 +64,10 @@ function App() {
           <Route path="/food" element={<Food />} />
           <Route path="/search-results" element={<SearchResultsPage />} />
           <Route path="/feedback" element={<Feedback/>} />
+          <Route path="/login" element={<Login/>} />
+            <Route path="/register" element={<Register/>} />
+     
+          
         </Routes>
       </div>
     </CartProvider>

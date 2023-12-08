@@ -16,7 +16,7 @@ const Food = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://655f02f3879575426b4459ed.mockapi.io/anh'); // Sử dụng Axios thay vì fetch
+        const response = await axios.get('https://655f02f3879575426b4459ed.mockapi.io/anh'); 
         const data = response.data;
         setOriginalFoods(data);
         setFoods(data); 

@@ -118,3 +118,64 @@ button {
     margin-right: 1rem;
   }
   
+  .user-info{
+    display: flex;
+  }
+  /* .logout-box{
+    background-color: rgb(95, 94, 94);
+    margin-top: 43px;
+    width: 150px;
+    height: 200ppx;
+    position: absolute;
+    margin-left: -80px;
+  } */
+  /* Trong file CSS của bạn */
+.logout-box {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #ffffff; /* Màu nền của box */
+  border: 1px solid #ccc; /* Đường viền */
+  border-radius: 5px; /* Góc bo tròn */
+  cursor: pointer; /* Biểu tượng con trỏ khi di chuyển qua */
+  transition: background-color 0.3s ease; /* Hiệu ứng màu nền khi hover */
+  margin-top: 43px;
+  position: absolute;
+  margin-left: -160px;
+  width: 200px;
+  height: 110px;
+}
+
+.logout-box:hover {
+  background-color: #f0f0f0; /* Màu nền thay đổi khi hover */
+}
+
+.logout-box span {
+  margin-right: 10px;
+  margin-top: -80px;
+}
+
+.img-acc{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+#iconlogout{
+  display: flex;
+margin-top: 90px;
+margin-left: -110px;
+
+}
+.sua{
+  margin-left: -70px;
+  width: 40px;
+  border-radius: 0px;
+  height: 25px;
+  background-color: rgb(8, 0, 255);
+  font-weight: 700;
+  color: #ccc;
+  text-align: center;
+  border-radius: 5px;
+}
