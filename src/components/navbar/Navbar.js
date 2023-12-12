@@ -85,15 +85,18 @@ const Navbar = () => {
           <div className="user-info" onClick={() => setShowLogout(!showLogout)}>
             <MdAccountCircle size={35}/> 
             {showLogout && (
-              <div className="logout-box">
-                <img  className="img-acc" src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"></img>
-                <span>@{username}</span>
-                {name}
-               
-                <div id="iconlogout" onClick={handleLogout}>
-                <IoMdLogOut size={20}   />Đăng xuất
-                </div>
-              </div>
+          <div className="logout-box">
+          <img className="img-acc" src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="User Avatar" />
+          <div>
+            <span>@.{username}</span>
+            <div className='name'>Tên: {name}</div>
+        
+          <div id="iconlogout" onClick={handleLogout}>
+            <IoMdLogOut size={20} />Đăng xuất
+          </div>
+          </div>
+        </div>
+        
             )}
           </div>
         ) : (

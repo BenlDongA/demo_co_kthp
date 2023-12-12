@@ -8,52 +8,86 @@ function Register() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = () => {
-    // Gửi dữ liệu đăng ký lên API
-    axios.post('https://656af8a9dac3630cf727840b.mockapi.io/login/login', { username, password, name })
-      .then(response => {
-        // Xử lý phản hồi từ API (nếu cần)
-        console.log('Registration successful:', response.data);
-        alert('Registration successful!');
-        // Chuyển hướng sang trang đăng nhập sau khi đăng ký thành công
-        navigate('/login');
-      })
-      .catch(error => {
-        console.error('Error registering user:', error);
-        alert('Error registering user. Please try again.');
-      });
+  const handleRegister = async (event) => {
+    event.preventDefault();
+
+    if (!username || !password || !name) {
+      alert('Hãy nhập đủ các thông tin');
+      return;
+    }
+
+    try {
+      const checkUser = await axios.get(`https://656af8a9dac3630cf727840b.mockapi.io/login/login?username=${username}`);
+      if (checkUser.data.length > 0) {
+        alert('Tên người dùng đã tồn tại');
+        return;
+      }
+
+      const response = await axios.post('https://656af8a9dac3630cf727840b.mockapi.io/login/login', { username, password, name });
+      console.log('Registration successful:', response);
+      alert('Đăng Kí thành công');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error registering user:', error);
+      alert('Error registering user. Please try again.');
+    }
   };
+  
 
   return (
     <div className="Register">
-      <h2>Register</h2>
-      <h2>Register</h2>
-      <h2>Register</h2>
-      <h2>Register</h2>
 
-      <form>
-      <label>
-         Name:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </label>
-        <br></br>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </label>
+    <section className="bg-gray-50 dark:bg-gray-900 pt-32">
+      <div className=" flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        
+    <form class="max-w-sm mx-auto">
+    <a  className="flex items-center mb-8 text-2xl font-semibold text-gray-900 dark:text-white">
+        SIGN UP </a>
+        
+      <div class="mb-5">
+        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nhập email</label>
+        <input  class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
+        dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 
+        dark:shadow-sm-light" placeholder="name@gmail" required
+       value={username} onChange={(e) => setUsername(e.target.value)}>
+        </input>
+      </div>
+      <div class="mb-5">
+        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nhập Tên</label>
+        <input   class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
+        dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 
+        dark:shadow-sm-light"required
+       value={name} onChange={(e) => setName(e.target.value)}>
+        </input>
+      </div>
+     
+      <div class="mb-5">
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nhập mật khẩu</label>
+        <input type="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 
+        text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
+        dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="******"  required
+        value={password} onChange={(e) => setPassword(e.target.value)} ></input>
+      </div>
+     <button
+  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
+  font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 
+  dark:focus:ring-blue-800"
+  onClick={(event) => handleRegister(event)} 
+>
+  Đăng kí
+</button>
+            {/* Link to navigate back to login page */}
+            <Link to="/login" className="block text-center text-blue-600 hover:underline mt-3">Trờ về đăng nhập</Link>
+    </form>
+    
+    
+        </div>
        
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <br />
-        <button type="button" onClick={handleRegister}>Register</button>
-        <Link to="/login">
-          <button type="button">Back to Login</button>
-        </Link>
-      </form>
-    </div>
+        </section>
+        </div>
   );
 }
 

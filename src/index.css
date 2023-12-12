@@ -23,3 +23,10 @@
 .kq{
   padding-top: 50px;
 }
+
+body {
+  -webkit-user-select: none; 
+  -moz-user-select: none;
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none;
+}

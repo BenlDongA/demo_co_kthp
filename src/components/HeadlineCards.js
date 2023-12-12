@@ -8,15 +8,15 @@ const HeadlineCards = () => {
       <div className='rounded-xl relative'>
         {/* Overlay */}
         <div className='absolute w-full h-full bg-black/50 rounded-xl text-white'>
-          <p className='font-bold text-2xl px-2 pt-4'>Sun's Out, BOGO's Out</p>
-          <p className='px-2'>Through 8/26</p>
+          <p className='font-bold text-2xl px-2 pt-4'>Tưng bừng giáng sinh Sale off 20% các món nướng</p>
+          <p className='px-2'>Đến ngày 26/12</p>
           <Link to="/food">
-          <button className='border-white bg-white text-black mx-2 absolute bottom-4'>Order Now</button>
+          <button className='border-white bg-white text-black mx-2 absolute bottom-4'>Đặt ngay</button>
           </Link> 
         </div>
         <img
         className='max-h-[160px] md:max-h-[200px] w-full object-cover rounded-xl'
-          src='https://images.unsplash.com/photo-1613769049987-b31b641f25b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGJyZWFrZmFzdHxlbnwwfDB8MHx8&auto=format&fit=crop&w=800&q=60'
+          src='https://cdn.sforum.vn/sforum/wp-content/uploads/2022/11/noel-ngay-may-thumbnail-1.jpg'
           alt='/'
         />
       </div>
@@ -24,13 +24,15 @@ const HeadlineCards = () => {
       <div className='rounded-xl relative'>
         {/* Overlay */}
         <div className='absolute w-full h-full bg-black/50 rounded-xl text-white'>
-          <p className='font-bold text-2xl px-2 pt-4'>New Restaurants</p>
-          <p className='px-2'>Added Daily</p>
-          <button className='border-white bg-white text-black mx-2 absolute bottom-4'>Order Now</button>
+          <p className='font-bold text-2xl px-2 pt-4'>Kỷ miệm 10 năm thành lập nhà hàng Sale off 25% các món Lẩu</p>
+          <p className='px-2'>Từ ngày 10/12 - 20/12</p>
+          <Link to="/food">
+          <button className='border-white bg-white text-black mx-2 absolute bottom-4'>Đặt ngay</button>
+          </Link>
         </div>
         <img
         className='max-h-[160px] md:max-h-[200px] w-full object-cover rounded-xl'
-          src='https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJicXxlbnwwfDB8MHx8&auto=format&fit=crop&w=800&q=60'
+          src='https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-background-hot-pot-green-leaf-minimalist-chinese-banner-image_183510.jpg'
           alt='/'
         />
       </div>
@@ -38,13 +40,15 @@ const HeadlineCards = () => {
       <div className='rounded-xl relative'>
         {/* Overlay */}
         <div className='absolute w-full h-full bg-black/50 rounded-xl text-white'>
-          <p className='font-bold text-2xl px-2 pt-4'>We Deliver Desserts Too</p>
-          <p className='px-2'>Tasty Treats</p>
-          <button className='border-white bg-white text-black mx-2 absolute bottom-4'>Order Now</button>
+          <p className='font-bold text-2xl px-2 pt-4'>Tri cân khách hàng thân thiết mua 2 món tặng 1 nước.</p>
+          <p className='px-2'>Đến hết ngày 30/12</p>
+          <Link to="/food">
+          <button className='border-white bg-white text-black mx-2 absolute bottom-4'>Đặt ngay</button>
+          </Link>
         </div>
         <img
         className='max-h-[160px] md:max-h-[200px] w-full object-cover rounded-xl'
-          src='https://images.unsplash.com/photo-1559715745-e1b33a271c8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGRlc3NlcnR8ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'
+          src='https://file.hstatic.net/200000665395/article/mau-content-tri-an-khach-hang_bf5a86a66842466a96d6fe15d917687a.jpg'
           alt='/'
         />
       </div>

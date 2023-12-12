@@ -2,8 +2,10 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useCart } from '../cart/CartContext';
 import { Link} from 'react-router-dom';
 import './best_sale.css'
+import { useAuth } from "../Login/AuthProvider";
 const BestSaleItems = () => {
     const { addToCart } = useCart();
+    const { isLoggedIn } = useAuth(); // Sử dụng useAuth để kiểm tra đăng nhập
   const bestSaleItem = [
     
         {
@@ -37,7 +39,14 @@ const BestSaleItems = () => {
     
   ]
 
-  
+  const handleAddToCart = (item) => {
+    if (!isLoggedIn) {
+      alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.');
+    } else {
+      
+      addToCart(item);
+    }
+  };
   return (
     <>
    
@@ -57,7 +66,7 @@ const BestSaleItems = () => {
           />
           <div className='flex justify-between px-2 py-4'>
             <p className='font-bold'>{item.name}</p>
-            <button onClick={() => addToCart(item)}>Add to cart +</button>
+            <button onClick={() => handleAddToCart(item)}>Add to cart +</button>
             <p>
               <span className='bg-orange-500 text-white p-1 rounded-full'>
                 {item.price}$

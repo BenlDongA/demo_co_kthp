@@ -19,6 +19,7 @@ const calculateTotalPrice = (cart) => {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
+      console.log('Current State:', state);
       const existingItemIndex = state.cart.findIndex(item => item.id === action.payload.id);
 
       if (existingItemIndex !== -1) {
@@ -136,6 +137,17 @@ const cartReducer = (state, action) => {
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      dispatch({ type: 'RESET_CART', payload: JSON.parse(storedCart) });
+    }
+  }, []);
+  
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(state.cart));
+  }, [state.cart]);
   useEffect(() => {
     dispatch({ type: 'CALCULATE_CHECKED_TOTALS' });
   }, [state.cart]);
