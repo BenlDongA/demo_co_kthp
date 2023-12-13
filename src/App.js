@@ -56,6 +56,7 @@ function App() {
               <HeadlineCards />
               <BestSalez/>
              <BestSale/>
+             <BestSalez/>
             </div>
             <Footerr />
           </div>} />

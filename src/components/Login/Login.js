@@ -20,10 +20,8 @@ function Login() {
   }, []); 
 
   const handleLogin = () => {
-    
     // Kiểm tra đăng nhập
     const user = users.find(u => u.username === username && u.password === password);
-    
     if (user) {
       login(user); // Truyền thông tin user khi đăng nhập thành công
       alert('Đăng nhập thành công!');

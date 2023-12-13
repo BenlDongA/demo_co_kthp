@@ -75,17 +75,21 @@ const Food = () => {
   // Hàm xóa sản phẩm(admin)
   const handleDeleteProduct = (productId) => {
     if (isAdmin) {
-      // Logic để xóa sản phẩm
-      axios.delete(`https://655f02f3879575426b4459ed.mockapi.io/anh/${productId}`)
-        .then(() => {
-          const updatedFoods = foods.filter(item => item.id !== productId);
-          setFoods(updatedFoods);
-        })
-        .catch(error => console.error('Error deleting product:', error));
-    } else {
-      alert('You do not have permission to delete products.');
-    }
+      // Lời nhắc xác nhận trước khi xóa
+      const confirmDelete = window.confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');
+      
+      if (confirmDelete) {
+        // Logic to delete the product
+        axios.delete(`https://655f02f3879575426b4459ed.mockapi.io/anh/${productId}`)
+          .then(() => {
+            const updatedFoods = foods.filter(item => item.id !== productId);
+            setFoods(updatedFoods);
+          })
+          .catch(error => console.error('Error deleting product:', error));
+      }
+    } 
   };
+  
 
   // Hàm tạo sản phẩm mới(admin)
   const handleCreateProduct = () => {
@@ -116,10 +120,10 @@ const Food = () => {
     if (isAdmin) {
       const updatedFields = { ...existingProduct }; // Tạo bản sao của các trường thông tin sản phẩm
 
-      const newName = prompt('Enter new product name:');
-      const newPrice = parseFloat(prompt('Enter new product price:'));
-      const newImage = prompt('Enter new product image URL:');
-      const newType = prompt('Enter new product type:');
+      const newName = prompt('Nhập tên sản phẩm mới:');
+      const newPrice = parseFloat(prompt('Nhập giá sản phẩm mới:'));
+      const newImage = prompt('Nhập URL ảnh sản phẩm mới:');
+      const newType = prompt('Nhập loại sản phẩm mới:');
 
       if (newName !== null && newName !== '') {
         updatedFields.name = newName;
