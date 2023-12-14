@@ -28,4 +28,9 @@
 .formfeed{
     background-color: rgb(130, 130, 130);
     width: 348px;
+
+    margin-top: 10px;
+}
+#at1{
+    width: 70px;
 }

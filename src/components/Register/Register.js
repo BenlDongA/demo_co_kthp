@@ -41,8 +41,8 @@ function Register() {
       <div className=" flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         
     <form class="max-w-sm mx-auto">
-    <a  className="flex items-center mb-8 text-2xl font-semibold text-gray-900 dark:text-white">
-        SIGN UP </a>
+    <div  className="flex items-center mb-8 text-2xl font-semibold text-gray-900 dark:text-white">
+        SIGN UP </div>
         
       <div class="mb-5">
         <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nhập email</label>
@@ -79,7 +79,7 @@ function Register() {
 >
   Đăng kí
 </button>
-            {/* Link to navigate back to login page */}
+           
             <Link to="/login" className="block text-center text-blue-600 hover:underline mt-3">Trờ về đăng nhập</Link>
     </form>
     

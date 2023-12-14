@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './index.css';
 import Navbar from './components/navbar/Navbar';
-import BookTable from './components/booktable';
+import BookTable from './components/booktable/booktable';
 import HeadlineCards from './components/HeadlineCards';
 import Food from './components/food/Food';
 import { CartProvider } from './components/cart/CartContext';
@@ -15,6 +15,7 @@ import BestSalez from './components/best-sale/contact'
 import Feedback from './components/feedback/feedback';
 import Login from './components/Login/Login'
 import Register from './components/Register/Register';
+import ShowFeedBack from './components/showfeedback/showfeedback';
 
 function App() {
   const location = useLocation();
@@ -56,7 +57,7 @@ function App() {
               <HeadlineCards />
               <BestSalez/>
              <BestSale/>
-             <BestSalez/>
+             <ShowFeedBack/>
             </div>
             <Footerr />
           </div>} />

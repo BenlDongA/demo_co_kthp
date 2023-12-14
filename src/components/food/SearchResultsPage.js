@@ -14,7 +14,7 @@ function SearchResultsPage() {
     const fetchData = async () => {
       try {
         if (query) {
-          const response = await axios.get(`https://655f02f3879575426b4459ed.mockapi.io/anh?search=${query}`); // Sử dụng Axios thay vì fetch
+          const response = await axios.get(`https://655f02f3879575426b4459ed.mockapi.io/anh?search=${query}`); 
           const data = response.data;
 
           if (data.length === 0) {

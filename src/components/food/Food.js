@@ -108,7 +108,7 @@ const Food = () => {
           })
           .catch(error => console.error('Error creating product:', error));
       } else {
-        alert('Vu lòng nhập lại thông tin.');
+        alert('Vui lòng nhập lại thông tin.');
       }
     } else {
       alert('You do not have permission to create products.');
@@ -123,7 +123,7 @@ const Food = () => {
       const newName = prompt('Nhập tên sản phẩm mới:');
       const newPrice = parseFloat(prompt('Nhập giá sản phẩm mới:'));
       const newImage = prompt('Nhập URL ảnh sản phẩm mới:');
-      const newType = prompt('Nhập loại sản phẩm mới:');
+      const newType = prompt('Nhập loại sản phẩm mới  :');
 
       if (newName !== null && newName !== '') {
         updatedFields.name = newName;
@@ -155,9 +155,7 @@ const Food = () => {
           setFoods(updatedFoods);
         })
         .catch(error => console.error('Error updating product:', error));
-    } else {
-      alert('You do not have permission to edit products.');
-    }
+    } 
   };
 
 

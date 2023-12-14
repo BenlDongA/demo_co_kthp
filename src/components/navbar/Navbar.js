@@ -31,7 +31,7 @@ const Navbar = () => {
     }
   };
   const handleLogout = () => {
-    console.log('Logging out:', username);
+ 
     // Use the logout function from the useAuth hook
     logout();
     // Redirect to the home page or another appropriate location
